@@ -1,0 +1,10 @@
+<!-- Previous Button -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="28"
+     height="28"
+     viewBox="0 0 24 24"
+     fill="white">
+
+    <path d="M6 6h2v12H6z"/>
+    <path d="M18 6v12l-8.5-6z"/>
+</svg>

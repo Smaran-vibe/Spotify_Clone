@@ -1,0 +1,12 @@
+<!-- Rounded Small Play Button -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="28"
+     height="28"
+     viewBox="0 0 24 24">
+
+   
+    <circle cx="12" cy="12" r="11" fill="white"/>
+
+   
+    <path d="M10 8L17 12L10 16V8Z" fill="black"/>
+</svg>
