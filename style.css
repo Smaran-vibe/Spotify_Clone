@@ -169,11 +169,19 @@ body {
 .playbar{
     position: absolute;
     bottom: 0;
-    background-color: rgb(4, 73, 4);
-    width: 100%;
+    background-color: rgb(19, 31, 19);
+    width: 90%;
     padding: 12px;
     display: flex;
     justify-content: center;
     gap: 10px;
 
+}
+
+.songlist ul{
+    padding: 0 25px;
+}
+
+.songlist ul li{
+    list-style: decimal;
 }
