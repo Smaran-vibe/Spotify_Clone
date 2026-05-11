@@ -167,21 +167,88 @@ body {
 }
 
 .playbar{
-    position: absolute;
-    bottom: 0;
-    background-color: rgb(19, 31, 19);
-    width: 90%;
-    padding: 12px;
+    position: fixed;
+    bottom: 20px;
+    filter: invert(1);
+    background-color: rgb(122 111 111);
+    width: 70vw;
+    padding: 2px;
+    border-radius: 8px;
     display: flex;
     justify-content: center;
     gap: 10px;
+    height: 40px;
 
 }
 
+.songlist{
+    height: 544px;
+    overflow: auto;
+    margin-bottom: 26px;
+}
+
 .songlist ul{
-    padding: 0 25px;
+    padding: 0 10px;
 }
 
 .songlist ul li{
     list-style: decimal;
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+    padding: 8px 0;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin: 10px 0px;
+    padding: 6px;
+    justify-content: space-between;
+}
+
+.playnow{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+}
+
+
+.playnow img{
+    height: 28px;
+    width: 28px;
+}
+
+.playnow span{
+    font-size: 12px;
+    width: 64px;
+    padding: 5px;
+}
+
+.info {
+    font-size: 12px;
+    width: 344px;
+}
+
+.seekbar{
+    width: 98%;
+    height: 3px;
+    background:  black;
+    position: absolute;
+    bottom: 0;
+    border-radius: 10px;
+    margin: 4px;
+
+}
+
+.circle{
+    height: 10px;
+    width: 10px;
+    background-color: black;
+    border-radius: 13px;
+    position: relative;
+    bottom: 5px;
+    left: 0%;
+    transition: left 0.5s;
+
 }
