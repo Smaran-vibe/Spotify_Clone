@@ -1,0 +1,13 @@
+<!-- Pause Button SVG -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="28"
+     height="28"
+     viewBox="0 0 24 24">
+
+    <!-- Circle -->
+    <circle cx="12" cy="12" r="11" fill="white"/>
+
+    <!-- Pause Bars -->
+    <rect x="8" y="7" width="3" height="10" rx="1" fill="black"/>
+    <rect x="13" y="7" width="3" height="10" rx="1" fill="black"/>
+</svg>
