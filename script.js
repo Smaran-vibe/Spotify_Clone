@@ -121,6 +121,20 @@ async function main() {
         
 
     })
+
+    // Add an eventListener to hamburger 
+
+    document.querySelector(".hamburger").addEventListener("click", e => {
+
+        document.querySelector(".left").style.left = "0"
+
+
+    })
+    // Add an eventlistener to close button
+
+    document.querySelector(".close").addEventListener("click",e =>{
+        document.querySelector(".left").style.left = "-120%"
+    })
 }
 
 
