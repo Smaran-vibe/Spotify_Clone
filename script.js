@@ -1,6 +1,12 @@
 console.log('Javascript initializing......');
-
 let currentsong = new Audio()
+
+let play = document.querySelector("#play");
+let previous = document.querySelector("#previous");
+let next = document.querySelector("#next");
+
+let songs = []
+
 async function getSongs() {
 
     let a = await fetch("http://127.0.0.1:3000/Songs/")
@@ -11,8 +17,6 @@ async function getSongs() {
     div.innerHTML = response;
     let as = div.getElementsByTagName("a")
     console.log();
-
-    let songs = []
 
     for (let index = 0; index < as.length; index++) {
         const element = as[index];
@@ -61,7 +65,7 @@ function formatTime(seconds) {
 }
 
 async function main() {
-    let songs = await getSongs();
+    songs = await getSongs();
     console.log("Songs array:", songs);
     playMusic(songs[0], true)
 
@@ -107,18 +111,18 @@ async function main() {
 
         document.querySelector(".songtime").innerHTML =
             `${formatTime(currentsong.currentTime)} / ${formatTime(currentsong.duration)}`
-            document.querySelector(".circle").style.left = (currentsong.currentTime / currentsong.duration) * 100 + "%"
+        document.querySelector(".circle").style.left = (currentsong.currentTime / currentsong.duration) * 100 + "%"
     })
 
     // Add an eventListener to seekbar 
 
-    document.querySelector(".seekbar").addEventListener("click", e =>{
+    document.querySelector(".seekbar").addEventListener("click", e => {
 
-        let percent = (e.offsetX/e.target.getBoundingClientRect().width) * 100;
+        let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
 
         document.querySelector(".circle").style.left = percent + "%";
-        currentsong.currentTime = ((currentsong.duration) * percent)/100
-        
+        currentsong.currentTime = ((currentsong.duration) * percent) / 100
+
 
     })
 
@@ -132,10 +136,51 @@ async function main() {
     })
     // Add an eventlistener to close button
 
-    document.querySelector(".close").addEventListener("click",e =>{
+    document.querySelector(".close").addEventListener("click", e => {
         document.querySelector(".left").style.left = "-120%"
     })
+    
+    // add an event listener to volume
+   document.querySelector(".range input").addEventListener("input", (e) => {
+
+    currentsong.volume = e.target.value / 100;
+
+})
+
 }
+
+// add an eventlistener to previous and next 
+
+previous.addEventListener("click", () => {
+    console.log("previous clicked");
+
+    let currentSongFile = decodeURIComponent(currentsong.src.split("/").pop());
+    console.log("Current song:", currentSongFile);
+
+    let index = songs.indexOf(currentSongFile);
+    console.log("Index:", index);
+
+    if (index > 0) {
+        playMusic(songs[index - 1]);
+    }
+})
+
+next.addEventListener("click", () => {
+    console.log("next clicked");
+
+    let currentSongFile = decodeURIComponent(currentsong.src.split("/").pop());
+    console.log("Current song:", currentSongFile);
+
+    let index = songs.indexOf(currentSongFile);
+    console.log("Index:", index);
+
+    if (index < songs.length - 1) {
+        playMusic(songs[index + 1]);
+    }
+})
+
+
+
 
 
 main()
