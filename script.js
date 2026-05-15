@@ -7,17 +7,21 @@ let next = document.querySelector("#next");
 
 let songs = []
 
-async function getSongs() {
+let currentFolder = "";
 
-    let a = await fetch("http://127.0.0.1:3000/Songs/")
+async function getSongs(folder) {
+
+    let a = await fetch(`http://127.0.0.1:3000/Songs/${folder}/`)
     let response = await a.text();
-    console.log(a);
-    console.log(response);
+      console.log("Raw response:", response); 
+    console.log("Status:", a.status); 
+
     let div = document.createElement("div")
     div.innerHTML = response;
     let as = div.getElementsByTagName("a")
     console.log();
 
+    songs = []
     for (let index = 0; index < as.length; index++) {
         const element = as[index];
 
@@ -31,12 +35,12 @@ async function getSongs() {
 
 }
 
-const playMusic = (track, pause = false) => {
-    console.log("Playing:", track); // check what comes in
-    currentsong.src = "/Songs/" + track;
-    console.log("Full path:", "/Songs/" + track);
-    if (!pause) {
+const playMusic = (track, folder, pause = false) => {
+    console.log("Playing:", track); 
+   currentsong.src = `/Songs/${folder}/${track}`;
+    console.log("Full path:", `/${folder}/` + track);
 
+    if (!pause) {
         currentsong.play()
             .then(() => {
                 console.log("Playing!");
@@ -65,37 +69,48 @@ function formatTime(seconds) {
 }
 
 async function main() {
-    songs = await getSongs();
-    console.log("Songs array:", songs);
-    playMusic(songs[0], true)
+    
+    Array.from(document.querySelectorAll(".card")).forEach(card => {
+        card.addEventListener("click", async () => {
+            let folder = card.dataset.folder; 
+            console.log("Card clicked:", folder);
 
-    let SongUL = document.querySelector(".songlist").getElementsByTagName("ul")[0];
+            currentFolder = folder;
 
-    for (const song of songs) {
-        let songName = song.replace(".mp3", "");
-        let li = document.createElement("li");
-        li.dataset.song = song;
-        li.innerHTML = `
-            <img src="music.svg" alt="">
-            <div class="info">
-                <div>${songName}</div>
-                <div>Roronoa</div>
-            </div>
-            <div class="playnow">
-                <span>Play Now</span>
-                <img src="play.svg" alt="">
-            </div>`
+           
+            songs = await getSongs(folder);
+            console.log("Playlist:", songs);
 
+            let SongUL = document.querySelector(".songlist").getElementsByTagName("ul")[0];
+            SongUL.innerHTML = "";
 
-        li.addEventListener("click", () => {
-            console.log("Clicked:", song);
-            playMusic(song);
+            for (const song of songs) {
+                let songName = song.replace(".mp3", "");
+                let li = document.createElement("li");
+                li.dataset.song = song;
+                li.innerHTML = `
+                <img src="music.svg" alt="">
+                <div class="info">
+                    <div>${songName}</div>
+                    <div>Roronoa</div>
+                </div>
+                <div class="playnow">
+                    <span>Play Now</span>
+                    <img src="play.svg" alt="">
+                </div>`
+
+                li.addEventListener("click", () => {
+                    playMusic(song, folder); 
+                });
+
+                SongUL.appendChild(li);
+            }
+
+            // auto play first song of the playlist
+            playMusic(songs[0], folder);
         });
+    });
 
-        SongUL.appendChild(li);
-
-        // Attach an event listener to previous next and play 
-    }
     play.addEventListener("click", () => {
         if (currentsong.paused) {
             currentsong.play()
@@ -168,7 +183,7 @@ previous.addEventListener("click", () => {
     console.log("Index:", index);
 
     if (index > 0) {
-        playMusic(songs[index - 1]);
+           playMusic(songs[index - 1], currentFolder); 
     }
 })
 
@@ -182,7 +197,7 @@ next.addEventListener("click", () => {
     console.log("Index:", index);
 
     if (index < songs.length - 1) {
-        playMusic(songs[index + 1]);
+        playMusic(songs[index + 1], currentFolder);
     }
 })
 
@@ -205,9 +220,6 @@ volumeIcon.addEventListener("click", () => {
         volumeIcon.src = "volume.svg"
     }
 })
-
-
-
 
 
 main()
