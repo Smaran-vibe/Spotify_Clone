@@ -139,13 +139,20 @@ async function main() {
     document.querySelector(".close").addEventListener("click", e => {
         document.querySelector(".left").style.left = "-120%"
     })
-    
+
     // add an event listener to volume
-   document.querySelector(".range input").addEventListener("input", (e) => {
+    document.querySelector(".range input").addEventListener("input", (e) => {
 
-    currentsong.volume = e.target.value / 100;
+        currentsong.volume = e.target.value / 100;
 
-})
+        if (currentsong.volume == 0) {
+            volumeIcon.src = "mute.svg";
+        }
+        else {
+            volumeIcon.src = "volume.svg";
+        }
+
+    })
 
 }
 
@@ -176,6 +183,26 @@ next.addEventListener("click", () => {
 
     if (index < songs.length - 1) {
         playMusic(songs[index + 1]);
+    }
+})
+
+let volumeIcon = document.querySelector(".vol-icon");
+
+volumeIcon.addEventListener("click", () => {
+    if (currentsong.volume > 0) {
+
+        currentsong.volume = 0;
+
+        document.querySelector(".range input").value = 0
+
+        volumeIcon.src = "mute.svg"
+    }
+    else {
+        currentsong.volume = 1;
+
+        document.querySelector(".range input").value = 100;
+
+        volumeIcon.src = "volume.svg"
     }
 })
 
