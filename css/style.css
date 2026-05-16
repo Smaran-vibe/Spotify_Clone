@@ -94,24 +94,24 @@ body {
     width: 200px;
     padding: 10px;
     border-radius: 6px;
-    background-color:#242424;
+    background-color: #242424;
     position: relative;
     transition: all 1s;
 
 
 }
 
-.card h1{
+.card h1 {
     font-size: 18px;
 }
 
-.card p{
+.card p {
     font-size: 12px;
 }
 
-.card:hover{
-     background-color: #403e3e;
-     cursor: pointer;
+.card:hover {
+    background-color: #403e3e;
+    cursor: pointer;
 }
 
 .card:hover .play-btn {
@@ -121,11 +121,10 @@ body {
 
 .card img {
     width: 100%;
-    object-fit: contain;
+    height: 220px;
+    object-fit: cover;
     border-radius: 6px;
-    /* border-radius: 3px; */
 }
-
 
 .card>* {
     margin-top: 6px;
@@ -146,7 +145,7 @@ body {
     height: 20px;
     width: 53px;
     position: absolute;
-    top: 147px;
+    bottom: 144px;
     right: 23px;
     cursor: pointer;
     opacity: 0;
@@ -155,7 +154,7 @@ body {
 }
 
 .play-btn:hover {
-    scale: 1.05;
+    scale: 1.01;
 
 }
 
@@ -422,7 +421,7 @@ body {
 @media (max-width: 700px) {
     .card {
         width: clamp(180px, 80vw, 260px);
-        
+
 
     }
 
@@ -446,4 +445,3 @@ body {
         word-break: break-all;
     }
 }
-
