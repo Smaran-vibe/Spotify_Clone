@@ -12,6 +12,9 @@
 body {
     background-color: black;
     color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .left {
@@ -128,6 +131,16 @@ body {
 
 .card>* {
     margin-top: 6px;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+}
+
+.right {
+    flex: 1;
+    min-height: 100vh;
 }
 
 .cardContainer {
@@ -407,7 +420,8 @@ body {
     }
 
     .cardContainer {
-        margin: 0;
+        max-height: none;
+        overflow-y: visible;
         justify-content: center;
     }
 

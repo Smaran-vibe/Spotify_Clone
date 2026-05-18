@@ -225,6 +225,18 @@ async function main() {
             volumeIcon.src = "img/volume.svg";
         }
     })
+
+    currentsong.addEventListener("ended", () => {
+        let currentFile = decodeURIComponent(currentsong.src.split("/").pop())
+        let index = songs.indexOf(currentFile);
+
+        if (index < songs.length - 1) {
+            playMusic(songs[index + 1], currentFolder)
+
+        } else {
+            playMusic(songs[0], currentFolder);
+        }
+    });
 }
 
 
@@ -272,7 +284,7 @@ document.querySelector(".range input").addEventListener("input", (e) => {
     }
     else {
         volumeIcon.src = "img/volume.svg";
-        currentsong.volume = .10;
+
     }
 
 })
